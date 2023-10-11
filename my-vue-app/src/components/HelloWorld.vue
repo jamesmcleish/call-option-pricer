@@ -27,6 +27,8 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <button @click="incrementCount">Increment Count</button>
+    <p>Count: {{ count }}</p>
   </div>
 </template>
 
@@ -35,6 +37,16 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data() {
+    return {
+      count: 0 // Initialize the count variable
+    };
+  },
+  methods: {
+    incrementCount() {
+      this.count++; // Increment the count when the button is clicked
+    }
   }
 }
 </script>
