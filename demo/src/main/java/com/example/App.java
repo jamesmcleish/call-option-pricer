@@ -5,6 +5,8 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class App {
     public static void main(String[] args) throws IOException {
@@ -14,6 +16,13 @@ public class App {
         server.setExecutor(null); // Default executor
         server.start();
         System.out.println("Server is running on port " + port);
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/mydb");
+            System.out.println("Connected to PostgreSQL database");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     static class MyHandler implements HttpHandler {
