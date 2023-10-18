@@ -14,6 +14,15 @@ class TokenGenerator {
       secret
     );
   }
+  static decode(token) {
+    try {
+      const decoded = JWT.verify(token, secret);
+      return decoded;
+    } catch (error) {
+      // Handle the error, e.g., token is invalid or expired
+      throw new Error("Invalid or expired token");
+    }
+  }
 }
 
 module.exports = TokenGenerator;

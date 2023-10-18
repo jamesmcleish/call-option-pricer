@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    <LogoutButton />
     <h2>Projects</h2>
     <form @submit.prevent="calculateCallOptionPrice" class="calculator">
       <div class="form-group">
@@ -28,17 +29,26 @@
         <input id="dividend" placeholder="dividend" v-model="dividend" required>
       </div>
       <button type="submit">Calculate call option price</button> <br/>
-      <button @click="saveCalculation">Save Calculation</button>
+      <button @click="saveCalculation">Calculate and Save</button>
     </form>
     <div v-if="callOptionPrice !== null">
       <p>Call Option Price: {{ callOptionPrice }}</p>
       </div>
     </div>
+    <ProjectTable ref="projectTable" :reRenderFlag="reRenderFlag"/>
 </template>
   
   <script>
   import cumulativeStandardNormalDistribution from '../utils/normalDistribution.js';
+  import LogoutButton from './LogoutButton.vue';
+  import ProjectTable from './ProjectTable.vue';
+  import axios from 'axios';
+
   export default {
+    components: {
+    LogoutButton,
+    ProjectTable,
+    },
     data() {
       return {
         underlyingPrice: '',
@@ -48,6 +58,8 @@
         volatility: '',
         dividend:'',
         callOptionPrice: null,
+        token: window.localStorage.getItem('token'),
+        reRenderFlag: false,
       };
     },
     methods: {
@@ -68,25 +80,31 @@
           this.callOptionPrice = callOptionPrice.toFixed(2);
       },
       saveCalculation() {
+        this.calculateCallOptionPrice();
         const data = {
-        underlyingPrice: this.underlyingPrice,
-        riskFreeRate: this.riskFreeRate,
-        strikePrice: this.strikePrice,
-        timeToMaturity: this.timeToMaturity,
+        underlying_price: this.underlyingPrice,
+        risk_free_rate: this.riskFreeRate,
+        strike_price: this.strikePrice,
+        time_to_maturity: this.timeToMaturity,
         volatility: this.volatility,
         dividend: this.dividend,
-        callOptionPrice: this.callOptionPrice,
+        call_option_price: this.callOptionPrice,
+        token: this.token
         };
-        axios.post('http://localhost:3000/users/saveproject', data)
+        axios.post('http://localhost:3000/projects', data)
         .then(response => {
           console.log('Calculation saved:', response.data);
+          this.toggleRenderFlag();
         })
         .catch(error => {
           // Handle errors
           console.error('Error saving calculation:', error);
         });
-        },
-        },
+      },
+      toggleRenderFlag() {
+        this.reRenderFlag = !this.reRenderFlag;
+      },
+    },
   }
   </script>
   

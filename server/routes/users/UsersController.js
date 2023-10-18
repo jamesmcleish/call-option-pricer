@@ -44,14 +44,9 @@ async function tokenGenerator(req,res) {
   }
 }
 
-async function saveProject(req,res) {
-  
-}
-
 
 
 module.exports = {
   createUser,
   tokenGenerator,
-  saveProject,
 };

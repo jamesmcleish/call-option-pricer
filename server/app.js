@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const usersRouter = require("./routes/users/UsersRouter.js");
+const projectsRouter = require("./routes/projects/ProjectsRouter.js")
 const port = 3000;
 
 app.use(cors());
@@ -12,3 +13,4 @@ app.listen(port, () => {
 });
 
 app.use("/users", usersRouter);
+app.use("/projects", projectsRouter);

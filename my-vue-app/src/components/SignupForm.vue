@@ -1,5 +1,6 @@
 <template>
     <div class="background">
+      <BacktoLogin/>
         <div class="container">
         <h2>Signup</h2>
         <form @submit.prevent="signup">
@@ -21,8 +22,12 @@
 
 <script>
 import axios from 'axios';
+import BacktoLogin from './BackToLogin.vue';
 
 export default {
+  components: {
+    BacktoLogin
+  },
   data() {
     return {
       email: '',
@@ -55,59 +60,68 @@ export default {
 </script>
 
   
-  <style scoped>
-  .background {
-    background-image: url('../assets/background.jpeg');
-    background-size: cover;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    position: absolute;
-    width: 100%;
-  }
-  
-  .container {
-    width: 300px;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    background-color: #3056b6;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .form-group {
-    margin: 20px 0;
-    justify-content: center;
-  }
-  
-  label {
-    display: block;
-    font-weight: bold;
-  }
-  
-  input[type="text"],
-  input[type="password"] {
-    width: 90%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    align-items: center;
-  }
-  
-  button {
-    background-color: #007BFF;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    align-items: center;
-  }
-  </style>
+<style scoped>
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-size: cover;
+  padding: 0;
+}
+
+.container {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: #ff0000;
+  margin-top: 10px;
+}
+
+.signup-button {
+  text-align: center;
+  text-decoration: none;
+  color: #007bff;
+  margin-top: 10px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+</style>

@@ -63,7 +63,6 @@ export default {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: url('../assets/background.jpeg') no-repeat center center fixed;
     background-size: cover;
     padding: 0;
   }
