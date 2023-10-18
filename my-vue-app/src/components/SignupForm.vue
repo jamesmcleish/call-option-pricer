@@ -44,6 +44,7 @@ export default {
         .post('http://localhost:3000/users', userData, { headers: headers })
         .then(response => {
           console.log('Signup successful:', response.data);
+          this.$router.push('/');
         })
         .catch(error => {
           console.error('Error:', error);
@@ -63,6 +64,8 @@ export default {
     justify-content: center;
     align-items: center;
     color: #fff;
+    position: absolute;
+    width: 100%;
   }
   
   .container {
@@ -72,13 +75,14 @@ export default {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    background-color: #9d4444;
+    background-color: #3056b6;
     justify-content: center;
     align-items: center;
   }
   
   .form-group {
     margin: 20px 0;
+    justify-content: center;
   }
   
   label {
