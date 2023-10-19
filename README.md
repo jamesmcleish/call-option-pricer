@@ -1,5 +1,5 @@
 # structured-product-pricer
-Full stack web application for pricing structured products.
+Full stack web application for pricing european call options.
 
 # my-vue-app
 
