@@ -93,7 +93,7 @@
         };
         axios.post('http://localhost:3000/projects', data)
         .then(response => {
-          console.log('Calculation saved:', response.data);
+          response.data
           this.toggleRenderFlag();
         })
         .catch(error => {

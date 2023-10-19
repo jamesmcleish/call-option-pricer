@@ -1,8 +1,9 @@
 <template>
+  <div class="page">
+  <BacktoLogin/>
     <div class="background">
-      <BacktoLogin/>
         <div class="container">
-        <h2>Signup</h2>
+        <h2 class="title">Signup</h2>
         <form @submit.prevent="signup">
             <div class="form-group">
             <label for="email">Email:</label>
@@ -17,8 +18,9 @@
             </div>
         </form>
         </div>
+      </div>
     </div>
-  </template>
+</template>
 
 <script>
 import axios from 'axios';

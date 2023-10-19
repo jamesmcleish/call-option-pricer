@@ -47,8 +47,32 @@ async function getProjects(req, res) {
     res.status(500).json({ error: 'Failed to fetch projects' });
   }
 };
+async function deleteProject(req, res) {
+  try {
+    const projectId = req.params.id; // Assuming the ID is provided in the URL parameters
+    const token = req.headers.authorization.slice(7);
+    const user_email = TokenGenerator.decode(token);
+    
+    const query = 'DELETE FROM projects WHERE id = $1 AND user_email = $2';
+    const values = [projectId, user_email.user_id];
+
+    const result = await db.query(query, values);
+
+    if (result.rowCount === 0) {
+      res.status(403).json({ error: 'Not authorized to delete this project' });
+    } else {
+      res.json({ message: 'Project deleted successfully' });
+    }
+  } catch (error) {
+    console.error('Error deleting project:', error);
+    res.status(500).json({ error: 'Failed to delete the project' });
+  }
+}
+
+
 
 module.exports = {
   saveProject,
   getProjects,
+  deleteProject,
 };
